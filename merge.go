@@ -5,14 +5,18 @@ import (
 	"strings"
 )
 
+// define interval type, just for convience
 type Interval []int
 
+// check if interval has valid , has start and end numbers
 func (i Interval) Valid() bool {
 	if len(i) == 2 {
 		return true
 	}
 	return false
 }
+
+//get start number of interval
 func (i Interval) StartNum() int {
 	if i.Valid() {
 		return i[0]
@@ -20,6 +24,7 @@ func (i Interval) StartNum() int {
 	return 0
 }
 
+// get end number of interval
 func (i Interval) EndNum() int {
 	if i.Valid() {
 		return i[1]
@@ -27,6 +32,7 @@ func (i Interval) EndNum() int {
 	return 0
 }
 
+//extend end number of interval
 func (i Interval) ExtendTo(num int) bool {
 	if i.Valid() {
 		i[1] = num
@@ -35,6 +41,7 @@ func (i Interval) ExtendTo(num int) bool {
 	return false
 }
 
+// toString for values print
 func (i Interval) String() string {
 	if !i.Valid() {
 		return "()"
@@ -46,6 +53,7 @@ func (i Interval) String() string {
 	return "(" + strings.Join(b, "-") + ")"
 }
 
+// merges overlapped intervals and keeps non overlapped intervals
 func mergeItervals(intervals []Interval) []Interval {
 
 	mergedIntervals := []Interval{}
