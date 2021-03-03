@@ -40,3 +40,15 @@ without make
 `go test`
 
 ### Solution evoluation
+- What is execution time?
+  - I think in worst case time compaxity is  O( n log n )
+- How can robustness be ensured, especially with regard to very large inputs?
+  - Knowing memory usage of of intervals we can estimate max count of intervals we can process
+  - Do not forget about CPU usage, use a profiler to get a sense of CPU amd memory consumtion, use GOGC param to increase memory before CG
+  - Do performace testing and make a final estimation
+  - Consider about parallel computing, like map reduce systems
+- What is memory consumption?
+ - For a 2 dimensional array of "int" a total size is about 24 + (24 + 4 * i) * j, where array with intervals int[i][j]. 
+Basically in 64bit system, "int" is 4 bytes, int[] is 24 + 4 * i, where 24 is size of empty "int" array in go 
+
+
