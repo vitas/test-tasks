@@ -48,12 +48,13 @@ func TestOnlyOneInteval(t *testing.T) {
 func TestIntevals(t *testing.T) {
 	defer elapsedTime("TestIntervals")()
 
-	testInputInterval := []Interval{Interval{1, 2}, Interval{3, 5}, Interval{6, 7}, Interval{8, 10}, Interval{12, 16}}
-	testOutputInterval := []Interval{Interval{1, 5}, Interval{3, 5}, Interval{6, 7}, Interval{8, 10}, Interval{12, 16}}
+	testInputInterval := []Interval{Interval{25, 30}, Interval{2, 19}, Interval{14, 23}, Interval{8, 10}, Interval{4, 8}}
+	testOutputInterval := []Interval{Interval{2, 23}, Interval{25, 30}}
 
+	// some console debug info if fails
 	fmt.Printf("input intervals: %s\n", testInputInterval)
 	merged := mergeItervals(testInputInterval)
-	fmt.Printf("output intervals: %s\n", merged)
+	fmt.Printf("merged intervals: %s\n", merged)
 	fmt.Printf("expected output intervals: %s\n", testOutputInterval)
 
 	lenMerged := len(merged)

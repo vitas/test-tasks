@@ -5,9 +5,9 @@ import (
 )
 
 // Example of usage of merge function
-// see utils.go for more details
+// see utils.go and tests for more details
 func main() {
 	defer elapsedTime("merge")()
-	fmt.Println("Merge of intervals")
-	fmt.Println(mergeItervals([]Interval{Interval{1, 15}, Interval{17, 20}, Interval{18, 20}}))
+	fmt.Println("Example: Merge of intervals")
+	fmt.Printf("Result %s\n", mergeItervals([]Interval{Interval{25, 30}, Interval{2, 19}, Interval{14, 23}, Interval{8, 10}, Interval{4, 8}}))
 }
