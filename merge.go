@@ -8,6 +8,14 @@ import (
 // define interval type, just for convience
 type Interval []int
 
+//compare two intervals
+func (i Interval) Equals(ti Interval) bool {
+	if len(i) == len(ti) && i.Valid() && ti.Valid() && i.StartNum() == ti.StartNum() && i.EndNum() == ti.EndNum() {
+		return true
+	}
+	return false
+}
+
 // check if interval has valid , has start and end numbers
 func (i Interval) Valid() bool {
 	if len(i) == 2 {

@@ -1,22 +1,27 @@
 package main
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
-//TBD add range on vaslid values, inklusive negative ranges
 // Test valid interval values
-func TestIntervalPaar(t *testing.T) {
-	interval := Interval{1, 10}
-	if !interval.Valid() {
-		t.Errorf("Invalid interval value detected")
+func TestValidIntervalPaar(t *testing.T) {
+	validIntervals := []Interval{Interval{0, 20}, Interval{-5, 10}, Interval{5, 15}}
+	for _, interval := range validIntervals {
+		if !interval.Valid() {
+			t.Errorf("Invalid interval value detected: %s", interval)
+		}
 	}
 }
 
-//TBD add range of invalid values
 // Test invalid interval values
-func TestIvalidIntervalPaar(t *testing.T) {
-	interval := Interval{1, 10, 34}
-	if interval.Valid() {
-		t.Errorf("Invalid interval value not detected")
+func TestInvalidIntervalPaar(t *testing.T) {
+	invalidIntervals := []Interval{Interval{}, Interval{20, 0}, Interval{1}, Interval{1, 2, 3}, Interval{1, 1}}
+	for _, interval := range invalidIntervals {
+		if interval.Valid() {
+			t.Errorf("Invalid interval value not detected: %s", interval)
+		}
 	}
 }
 
@@ -36,5 +41,30 @@ func TestOnlyOneInteval(t *testing.T) {
 	len := len(merged)
 	if len != 1 {
 		t.Errorf("Invalid input interval array, got: %d, want: %d", len, 1)
+	}
+}
+
+//test merge of intervals
+func TestIntevals(t *testing.T) {
+	defer elapsedTime("TestIntervals")()
+
+	testInputInterval := []Interval{Interval{1, 2}, Interval{3, 5}, Interval{6, 7}, Interval{8, 10}, Interval{12, 16}}
+	testOutputInterval := []Interval{Interval{1, 5}, Interval{3, 5}, Interval{6, 7}, Interval{8, 10}, Interval{12, 16}}
+
+	fmt.Printf("input intervals: %s\n", testInputInterval)
+	merged := mergeItervals(testInputInterval)
+	fmt.Printf("output intervals: %s\n", merged)
+	fmt.Printf("expected output intervals: %s\n", testOutputInterval)
+
+	lenMerged := len(merged)
+	lenExpected := len(testOutputInterval)
+	if lenMerged != lenExpected {
+		t.Errorf("Invalid input interval array, got: %d, want: %d", lenMerged, lenExpected)
+	} else {
+		for i, expected := range testOutputInterval {
+			if !expected.Equals(merged[i]) {
+				t.Errorf("Invalid interval value detected: %s", merged[i])
+			}
+		}
 	}
 }
